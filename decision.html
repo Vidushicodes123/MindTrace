@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MindTrace – Decision Support</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card decision-card">
+  <h2>🧭 Decision Support</h2>
+  <p class="subtitle">
+    Based on your current cognitive load, here’s our recommendation.
+  </p>
+
+  <div id="decisionBox" class="decision-box">
+    <h3 id="decisionTitle"></h3>
+    <p id="decisionMessage"></p>
+  </div>
+
+  <a href="dashboard.html" class="secondary-btn full-width">
+    Back to Dashboard
+  </a>
+</div>
+
+<script>
+  const data = JSON.parse(localStorage.getItem("mindtrace"));
+
+  const title = document.getElementById("decisionTitle");
+  const msg = document.getElementById("decisionMessage");
+  const box = document.getElementById("decisionBox");
+
+  if (!data) {
+    title.innerText = "No assessment found";
+    msg.innerText = "Please complete an assessment first.";
+  } else if (data.total > 60) {
+    title.innerText = "❌ Avoid High-Effort Tasks";
+    msg.innerText =
+      "Your cognitive load is high. Starting a demanding task now may increase fatigue. Consider resting or doing a light task.";
+    box.classList.add("danger");
+  } else if (data.total > 40) {
+    title.innerText = "⚠️ Proceed with Caution";
+    msg.innerText =
+      "Your cognitive load is moderate. Prefer light or medium-effort tasks with breaks.";
+    box.classList.add("warning");
+  } else {
+    title.innerText = "✅ Good to Proceed";
+    msg.innerText =
+      "Your cognitive load is low. This is a good time to start a focused or high-effort task.";
+    box.classList.add("success");
+  }
+</script>
+
+</body>
+</html>

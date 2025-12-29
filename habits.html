@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MindTrace – Habit Reflection</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card habit-card">
+  <h2>🪴 Habit Reflection</h2>
+  <p class="subtitle">
+    Which habit influenced your cognitive load today?
+  </p>
+
+  <select id="habitSelect">
+    <option value="">Select a habit</option>
+    <option value="Poor Sleep">Poor Sleep</option>
+    <option value="Multitasking">Multitasking</option>
+    <option value="Deadlines">Deadlines</option>
+    <option value="Screen Time">Excessive Screen Time</option>
+    <option value="Lack of Breaks">Lack of Breaks</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <button class="primary-btn" onclick="saveHabit()">
+    Save Reflection
+  </button>
+
+  <h3 class="trend-title">📈 Your Habit History</h3>
+  <ul id="habitHistory" class="habit-list"></ul>
+
+  <a href="dashboard.html" class="secondary-btn full-width">
+    Back to Dashboard
+  </a>
+</div>
+
+<script>
+  const historyList = document.getElementById("habitHistory");
+  const habitSelect = document.getElementById("habitSelect");
+  const data = JSON.parse(localStorage.getItem("mindtrace"));
+
+  function loadHistory() {
+    const history = JSON.parse(localStorage.getItem("habitHistory")) || [];
+    historyList.innerHTML = "";
+
+    history.slice().reverse().forEach(item => {
+      const li = document.createElement("li");
+      li.innerText = `${item.date} • ${item.habit} • Score: ${item.score}`;
+      historyList.appendChild(li);
+    });
+  }
+
+  function saveHabit() {
+    if (!habitSelect.value || !data) return;
+
+    const history = JSON.parse(localStorage.getItem("habitHistory")) || [];
+
+    history.push({
+      date: new Date().toLocaleDateString(),
+      habit: habitSelect.value,
+      score: data.total
+    });
+
+    localStorage.setItem("habitHistory", JSON.stringify(history));
+    habitSelect.value = "";
+    loadHistory();
+  }
+
+  loadHistory();
+</script>
+
+</body>
+</html>

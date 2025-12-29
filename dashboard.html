@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MindTrace – Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card dashboard-card">
+
+  <!-- HEADER -->
+  <div class="dashboard-header">
+    <h2>🧠 MindTrace Dashboard</h2>
+    <p id="profileLine"></p>
+  </div>
+
+  <!-- ACTION CARDS -->
+  <div class="dashboard-grid">
+
+    <a href="decision.html" class="dash-tile">
+      <h3>🧭 Decision Support</h3>
+      <p>Get guidance on whether to start high-effort tasks right now.</p>
+    </a>
+
+    <a href="habits.html" class="dash-tile">
+      <h3>🪴 Habit Reflection</h3>
+      <p>Reflect on daily habits and see how they affect your mental load.</p>
+    </a>
+
+    <a href="results.html" class="dash-tile">
+      <h3>📊 Profile Overview</h3>
+      <p>View your cognitive load score, archetype, and summary report.</p>
+    </a>
+
+    <a href="assess.html" class="dash-tile">
+      <h3>🔁 Retake Assessment</h3>
+      <p>Reassess your cognitive load for updated insights.</p>
+    </a>
+
+  </div>
+
+</div>
+
+<script>
+  const data = JSON.parse(localStorage.getItem("mindtrace"));
+
+  if (data) {
+    document.getElementById("profileLine").innerText =
+      `Current Profile: ${data.archetype} • Score: ${data.total}`;
+  }
+</script>
+
+</body>
+</html>

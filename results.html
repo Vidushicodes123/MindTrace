@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MindTrace – Results</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card results-card">
+
+  <h2>Your MindTrace Profile</h2>
+
+  <!-- SCORE -->
+  <div class="score-box">
+    <span>Total Score</span>
+    <h1 id="scoreValue">--</h1>
+  </div>
+
+  <!-- ARCHETYPE -->
+  <div class="archetype-card">
+    <h3 id="archetypeName">--</h3>
+    <p id="archetypeDesc"></p>
+  </div>
+
+  <!-- RISK -->
+  <div class="risk-card" id="riskBox">
+    <strong>Risk Signal:</strong>
+    <span id="riskText">None</span>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-box">
+    <h4>What this means</h4>
+    <p id="summaryText"></p>
+  </div>
+
+  <a href="dashboard.html" class="primary-btn full-width">
+    Go to Dashboard
+  </a>
+
+</div>
+
+<script>
+  const data = JSON.parse(localStorage.getItem("mindtrace"));
+
+  document.getElementById("scoreValue").innerText = data.total;
+
+  document.getElementById("archetypeName").innerText = data.archetype;
+
+  const archetypeDescriptions = {
+    "Overloaded Multitasker":
+      "You tend to juggle multiple tasks at once, which increases mental effort and reduces clarity.",
+    "Emotionally Pressured Achiever":
+      "Your cognitive load is mainly driven by emotional strain and internal pressure.",
+    "Under-Recovered Performer":
+      "Insufficient recovery is amplifying mental fatigue even when workload is manageable.",
+    "Balanced Operator":
+      "You are managing mental demands, emotions, and recovery in a healthy balance."
+  };
+
+  document.getElementById("archetypeDesc").innerText =
+    archetypeDescriptions[data.archetype] || "";
+
+  document.getElementById("riskText").innerText = data.risk;
+
+  document.getElementById("summaryText").innerText =
+    `Your cognitive load is primarily influenced by ${data.archetype.toLowerCase()} patterns.
+     With small adjustments in task boundaries and recovery habits, mental balance can improve significantly.`;
+
+</script>
+
+</body>
+</html>
