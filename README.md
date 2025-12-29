@@ -53,7 +53,10 @@ The application is fully client-side with no backend dependencies.
 
 -----
 ## Project Structure
+
 mindtrace/
+
+
 ├── index.html // Landing page
 
 
