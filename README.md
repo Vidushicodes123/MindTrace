@@ -55,13 +55,29 @@ The application is fully client-side with no backend dependencies.
 ## Project Structure
 mindtrace/
 ├── index.html // Landing page
+
+
 ├── assess.html // Cognitive assessment
+
+
 ├── results.html // Profile and summary
+
+
 ├── dashboard.html // Navigation hub
+
+
 ├── decision.html // Decision support
+
+
 ├── habits.html // Habit reflection and trends
+
+
 ├── style.css // Shared styling
+
+
 ├── logic.js // Scoring and archetype logic
+
+
 └── storage.js // Local storage handling
 
 
